@@ -1,0 +1,30 @@
+# Terraform
+1. What is the difference between terraform count and for_each meta data function? and give me a scenario-based example to use them?
+count: This meta-argument is used to create multiple VM/instances of a resource based on a numeric value. It is useful when you want to create a fixed number of resources that are identical in configuration. For example, if you want to create 3 Virtual machines or EC2 instances with the same configuration, you can use count = 3
+
+for_each: This meta-argument is used to create multiple instances of a resource based on a map or set of strings. It is useful when you want to create multiple resources with different configurations. 
+For example, if you want to create multiple VMs or EC2 instances with different configurations, you can use for_each with a map that defines the instance configurations.
+Suppose you are creating an Azure Vnet  or AWS VPC with multiple subnets. You want to create 3 subnets in total: one public subnet and two private subnets. The public subnet should have a route table that routes traffic to the internet gateway, while the private subnets should have route tables that route traffic to a NAT gateway.
+To achieve this, you can use count to create the two private subnets and one public subnet. You can then use for_each to create the three route tables with different configurations.
+
+2.What is terraform taint? when to use it? When would you use terraform state rm vs terraform taint?
+terraform taint is a command that is used to marks a resource instance as “tainted” or misconfigured. 
+This means that the next terraform apply phase, terraform will destroy the existing resource instance and create a new one in its place. 
+We can use this command when you want to force a resource to be recreated.
+Terraform state rm is a command that removes a resource instance from your Terraform state file. This means that Terraform will no longer manage the resource. 
+We can use this command when you want to delete a resource that was created outside of Terraform.
+3.How would you show a diagram of all terraform resources in the state file when is this useful?
+We can use the terraform graph command to generate a visual representation of all the resources in our Terraform state file. This command generates a DOT file that can be used to create a diagram of your infrastructure.
+terraform graph | dot -Tsvg > graph.svg
+This command is useful when you want to visualize the dependencies between your resources and understand how they are connected. It can also help you identify any circular dependencies or other issues in your infrastructure.
+4.Solve this expresssion
+count =
+var.run_remote_environment ? var.TFC_RUN_ID !=
+["yes"] ;null
+
+5. How do you apply terraform to multiple accounts simultaneously? We want to ensure this follows security best practices.
+Create a separate Terraform configuration for each account that we want to manage.
+Use remote state to store the state files for each configuration in a centralized location such as an Blob storage /S3 bucket or a Terraform Cloud workspace.
+Use Terraform workspaces to manage the state files for each account separately. This allows you to keep the state files isolated and avoid conflicts between different accounts.
+We can also use Terraform modules to share common infrastructure code between different configurations. This allows you to reuse code and ensure consistency across different accounts.
+
