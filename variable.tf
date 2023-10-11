@@ -1,3 +1,16 @@
+#variable implementation VPC
+resource "aws_vpc" "govin-vpc" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "govin-vpc"
+  }
+}
+#variable 
+
+
+
 #variables implementation
 variable "instance_type" {
   description = "EC2 instance type"
