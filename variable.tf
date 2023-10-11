@@ -20,3 +20,18 @@ resource "aws_instance" "example_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
 }
+
+#aws listner
+variable "listener" {
+  type = object({
+    load_balancer_arn = string
+    port              = number
+    protocol          = string
+    ssl_policy        = string
+    certificate_arn   = string
+    default_action    = object({
+      type             = string
+      target_group_arn = string
+    })
+  })
+}
