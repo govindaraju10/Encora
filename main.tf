@@ -40,11 +40,11 @@ resource "aws_subnet" "replica" {
 #. Autoscaling group with a flexible cool down, deregistartion delay, instance warm up.
 To create an autoscaling group with a flexible cool down, deregistration delay, and instance warm-up, we can use the following Terraform code 
 
-resource "aws_autoscaling_group" "aws-asg" {
-  name                 = "aws-asg"
-  launch_configuration = aws_launch_configuration.aws-asg.id
+resource "aws_autoscaling_group" "govin-group-1" {
+  name                 = "govin-group-1"
+  launch_configuration = aws_launch_configuration.govin-group-1.id
   min_size             = 1
-  max_size             = 3
+  max_size             = 4
   desired_capacity     = 2
   health_check_grace_period = var.health_check_grace_period
   default_cooldown     = var.default_cooldown
@@ -53,10 +53,10 @@ resource "aws_autoscaling_group" "aws-asg" {
 }
 
 resource "aws_launch_configuration" "govin" {
-  name_prefix                 = "govin"
-  image_id                    = var.image_id
-  instance_type               = var.instance_type
-  security_groups             = [aws_security_group.example.id]
+  name_prefix                 = "govin-alc"
+  image_id                    = data.aws_ami.ubuntu.id
+  instance_type               = "t2.micro"
+  security_groups             = [aws_security_group.govin-asg.id]
   user_data                   = var.user_data
   associate_public_ip_address = false
 }
