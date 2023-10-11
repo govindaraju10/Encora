@@ -103,13 +103,13 @@ resource "aws_lb" "govin-lb" {
   subnets            = [aws_subnet.govin-subnet.id]
 }
 
-resource "aws_lb_listener" "govin-aws-listener" {
-  load_balancer_arn = aws_lb.govin-lb.arn
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.front_end.arn
   port              = var.port
   protocol          = var.protocol
 
   default_action {
-    target_group_arn = aws_lb_target_group.govin-lb.arn
+    target_group_arn = aws_lb_target_group.front_end.arn
     type             = "forward"
   }
 }
