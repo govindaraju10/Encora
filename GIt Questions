@@ -1,0 +1,28 @@
+# Git techincal questions
+# 1.if u using git stash where will it save data? what is the difference between index and staging area?
+When you use git stash, the data is saved in a temporary memory in the local repository. 
+The index and staging area are two different names for the same thing in Git. 
+The staging area is where you prepare changes for a commit. When you make changes to your files, Git sees them as “unstaged”. You can stage these changes by using the git add command. Once you have staged your changes, they are ready to be committed.
+# 2.when would individuals use git rebase, git fast -forward, or a gitfetch then push?
+git rebase: It is going to apply the multiple commits sequentially one after the other the commits happened to particular branch.
+It is useful when you want to keep your commit history linear and avoid merge commits. You can use it to update your feature branch with the latest changes from the main branch before merging it back into the main branch.
+git fast-forward: This command is used to update your local branch with the latest changes from the remote branch. 
+It is useful when you are working on a feature branch and want to keep it up-to-date with the main branch. If there are no new changes in the main branch, this command will simply move your local branch pointer forward to match the remote branch.
+git fetch followed by git push: This command sequence is used when we want to update your remote repository with the latest changes from our local repository. 
+We can use it when we have made changes to your local repository and want to push them to the remote repository. 
+The git fetch command downloads the latest changes from the remote repository, while the git push command uploads our local changes to the remote repository.
+# 3.How to revert already pushed changes?
+To revert already pushed changes, we can use the git revert command. This command creates a new commit that undoes the changes made by a previous commit. The original commit remains in the repository’s history, but the changes it made are undone.
+For example, git revert <commit-ID>
+# 4.what is the difference between git cherry-picking and trying a hard reset. what is the final outcome of the head reference?
+git cherry-pick and git reset are two different Git commands that serve different purposes.
+git cherry-pick: This command is used to apply a specific commit from one branch to another. It is useful when you want to apply a bug fix or feature from one branch to another without merging the entire branch. The final outcome of the HEAD reference will be the new commit that you just cherry-picked.
+git reset: This command is used to undo changes made to your repository. It is useful when you want to discard changes that you have made and start over. There are three types of git reset commands: --soft, --mixed, and --hard. The final outcome of the HEAD reference will be different depending on which type of reset you use.
+--soft: This option only resets the HEAD pointer to the specified commit, leaving your changes in the staging area. The final outcome of the HEAD reference will be the specified commit.
+
+--mixed: This option resets the HEAD pointer and unstages your changes, but leaves your changes in your working directory. The final outcome of the HEAD reference will be the specified commit.
+--hard: This option resets the HEAD pointer, unstages your changes, and discards all changes in your working directory. The final outcome of the HEAD reference will be the specified commit.
+# 5.Explain the difference between git remote and git clone?
+git remote: This command is used to manage the set of repositories that your Git repository tracks. 
+It will be useful when you want to add, remove, or view the remote repositories that your local repository is connected to. we can use it to push and pull changes between your local repository and the remote repository.
+git clone: This command is used to create a copy of a remote repository on your local machine. It is useful when you want to start working on a project that already exists in a remote repository. When you clone a repository, Git creates a local copy of the entire repository on your machine, including all branches and commit history.
