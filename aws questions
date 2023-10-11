@@ -1,0 +1,30 @@
+1.You have an EC2 instance that has an unencryted volume. You want to create another Encrypted volume form this unencrypted volume .which of the following steps can achieve this ? How would you share this encrypted volume to another account?
+what must you ensure to make sure thus cross-account encryption is shared?
+ To create an encrypted volume from an unencrypted volume, we can follow these steps:
+•	Stop the EC2 instance that has the unencrypted volume.
+•	Create a snapshot of the unencrypted volume.
+•	Copy the snapshot and encrypt it using an available key.
+•	Create a new EBS volume from the encrypted snapshot.
+To share this encrypted volume with another account, we can use the following steps:
+•	In the source account, create an EBS snapshot of the encrypted volume.
+•	Share the snapshot with the target account.
+•	In the target account, create a new EBS volume from the shared snapshot.
+To ensure that cross-account encryption is shared, you must ensure that the KMS key used to encrypt the snapshot is shared with the target account. You can share a KMS key by creating a key policy that grants permissions to the target account’s IAM user or role.
+ 
+2. How will you implement service control policy and in which area are you using it?
+Service Control Policies (SCPs) are a type of organization policy that you can use to manage permissions in your AWS organization. SCPs offer central control over the maximum available permissions for all accounts in your organization . SCPs are used to ensure that your accounts stay within your organization’s access control guidelines and help you to manage permissions in your organization .
+We can implement SCPs by creating a separate Terraform configuration for each account that we want to manage. 
+To create an SCP, we can use the AWS Management Console, AWS CLI, or AWS SDKs. You can define an SCP by specifying a policy that lists the actions that are allowed or denied for a set of AWS services. You can then attach the SCP to an organizational unit (OU) or an account in our organization .
+
+3.How can you convert a public subnet to private subnet?
+To convert a public subnet to a private subnet
+•	Create a new route table for the private subnet.
+•	Associate the new route table with the private subnet.
+•	Remove the default route from the new route table.
+•	Add a new route to the new route table that points to a NAT gateway or an instance in your VPC that has access to the internet.
+•	Update the security group rules for your instances in the private subnet to allow outbound traffic.
+
+4.What is the default route for any newly created route table?
+By default, a newly created route table has a local route for communication within the VPC. This means that the route table can be used to route traffic between resources in the same VPC. However, it does not have a default route that can be used to route traffic to the internet or other VPCs 
+5. How would you ensure routes in the route table DO NOT use the local routes?
+To ensure that routes in a route table do not use the local routes, we can remove the default local route from the route table. By default, every route table contains a local route for communication within the VPC . We can remove this route by creating a new route table and adding only the routes that you want to use. You can then associate the new route table with your subnets.
