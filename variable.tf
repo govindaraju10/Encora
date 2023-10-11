@@ -28,13 +28,9 @@ provider "aws" {
   region      = "us-east-1"
 }
 
-# Create an EC2 instance using the input variables
-resource "aws_instance" "example_instance" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-}
 
-#aws listner
+
+#configure aws listner
 variable "listener" {
   type = object({
     load_balancer_arn = aws_lb.front_end.arn
