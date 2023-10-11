@@ -1,6 +1,6 @@
 #Terraform Code to create the below Infrastructure:
 
-1.VPC in us-east-1 region. This should be flexible based on region. If no region is provided, this should be built in us -east-1.
+# 1.VPC in us-east-1 region. This should be flexible based on region. If no region is provided, this should be built in us -east-1.
 provider "aws" {
   region = var.region
 }
